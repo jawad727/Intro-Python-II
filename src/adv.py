@@ -86,13 +86,19 @@ selection = None
 while selection != 'q':
     print(f'\nYour Name: {playa.name}\nYour Inventory: {playa.inventory}\n')
     selection = input(f"Your Location is {playa.currentroom}\n")
-    
+    pickup = selection.replace("take ", "")
+    drop = selection.replace("drop ", "")
+
     if playa.currentroom == room['outside'] and selection == 'n':
         playa.currentroom = room['outside'].n_to
-    elif playa.currentroom == room['outside'] and selection in room['outside'].items:
-        playa.inventory.append(selection)
-        room['outside'].items.remove(selection)
-        print(f'\n***{selection} has been added to your inventory***')
+    elif playa.currentroom == room['outside'] and pickup in room['outside'].items:
+        playa.inventory.append(pickup)
+        room['outside'].items.remove(pickup)
+        print(f'\n***{pickup} has been added to your inventory***')
+    elif playa.currentroom == room['outside'] and drop in playa.inventory:
+        playa.inventory.remove(drop)
+        room['outside'].items.append(drop)
+        print(f'\n***{drop} has been dropped from your inventory***')
 
     elif playa.currentroom == room['foyer'] and selection == 'n':
         playa.currentroom = room['foyer'].n_to
@@ -100,19 +106,56 @@ while selection != 'q':
         playa.currentroom = room['foyer'].e_to
     elif playa.currentroom == room['foyer'] and selection == 's':
         playa.currentroom = room['foyer'].s_to
+    elif playa.currentroom == room['foyer'] and pickup in room['foyer'].items:
+        playa.inventory.append(pickup)
+        room['foyer'].items.remove(pickup)
+        print(f'\n***{pickup} has been added to your inventory***')
+    elif playa.currentroom == room['foyer'] and drop in playa.inventory:
+        playa.inventory.remove(drop)
+        room['foyer'].items.append(drop)
+        print(f'\n***{drop} has been dropped from your inventory***')
+    
 
     elif playa.currentroom == room['overlook'] and selection == 's':
         playa.currentroom = room['overlook'].s_to
+    elif playa.currentroom == room['overlook'] and pickup in room['overlook'].items:
+        playa.inventory.append(pickup)
+        room['overlook'].items.remove(pickup)
+        print(f'\n***{pickup} has been added to your inventory***')
+    elif playa.currentroom == room['overlook'] and drop in playa.inventory:
+        playa.inventory.remove(drop)
+        room['overlook'].items.append(drop)
+        print(f'\n***{drop} has been dropped from your inventory***')
+   
 
     elif playa.currentroom == room['narrow'] and selection == 'w':
         playa.currentroom = room['narrow'].w_to
     elif playa.currentroom == room['narrow'] and selection == 'n':
         playa.currentroom = room['narrow'].n_to
+    elif playa.currentroom == room['narrow'] and pickup in room['narrow'].items:
+        playa.inventory.append(pickup)
+        room['narrow'].items.remove(pickup)
+        print(f'\n***{pickup} has been added to your inventory***')
+    elif playa.currentroom == room['narrow'] and drop in playa.inventory:
+        playa.inventory.remove(drop)
+        room['narrow'].items.append(drop)
+        print(f'\n***{drop} has been dropped from your inventory***')
+   
 
     elif playa.currentroom == room['treasure'] and selection == 's':
         playa.currentroom = room['treasure'].s_to
+    elif playa.currentroom == room['treasure'] and pickup in room['treasure'].items:
+        playa.inventory.append(pickup)
+        room['treasure'].items.remove(pickup)
+        print(f'\n***{pickup} has been added to your inventory***')
+    elif playa.currentroom == room['treasure'] and drop in playa.inventory:
+        playa.inventory.remove(drop)
+        room['treasure'].items.append(drop)
+        print(f'\n***{drop} has been dropped from your inventory***')
+   
+
     elif selection == 'q':
         print('\nThanks for playing!')
     else:
-        print('\nPlease choose a valid direction\n')
+        print('\nYou cannot do that, please try again:\n')
     
